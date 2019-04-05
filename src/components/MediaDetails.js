@@ -7,7 +7,8 @@ class MediaDetails extends React.Component {
             background: '#f4f4f4',
             padding: '10px',
             borderBottom: '1px #ccc dotted',
-            textDecoration: this.props.mediaDetails.completed ? 'line-through' : 'none'
+            textDecoration: this.props.mediaDetails.completed ? 'line-through' : 'none',
+            display: 'flex'
         }
     }
 
@@ -26,8 +27,11 @@ class MediaDetails extends React.Component {
     }
 }
 MediaDetails.propTypes = {
-    mediaDetails: PropTypes.object.isRequired
+    mediaDetails: PropTypes.object.isRequired,
+    markComplete: PropTypes.func.isRequired,
+    delTodo: PropTypes.func.isRequired
 }
+
 const btnStyle = {
     background: '#ff0000',
     color: '#ffff',
@@ -35,6 +39,6 @@ const btnStyle = {
     padding: '15px 20px',
     borderRadius: '50%',
     cursor: 'pointer' ,
-    align: 'right'       
+    align: 'right'
 }
 export default MediaDetails;

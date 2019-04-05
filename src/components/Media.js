@@ -13,6 +13,8 @@ class Media extends React.Component {
 
 //PropTypes
 Media.propTypes = {
-    media: PropTypes.array.isRequired
+    media: PropTypes.array.isRequired,
+    markComplete: PropTypes.func.isRequired,
+    delTodo: PropTypes.func.isRequired
 }
 export default Media;

@@ -1,21 +1,20 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 class AddTodo extends React.Component {
-
   state = {
     title: ''
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.AddTodo(this.state.title);
+    this.props.addTodo(this.state.title);
     this.setState({title: ''})
   }
   onChange = (e) => this.setState({[e.target.name]: e.target.value});
   render() {
     return (
-       <form>
+       <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
          <input 
          type="text" 
          name="title" 
@@ -35,4 +34,10 @@ class AddTodo extends React.Component {
     )
   }
 }
+
+//PropTypes
+AddTodo.propTypes = {
+  addTodo: PropTypes.func.isRequired
+}
+
 export default AddTodo;

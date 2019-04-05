@@ -6,30 +6,17 @@ import Media from './components/Media';
 import Header from './components/Header';
 
 import AddTodo from './components/AddTodo';
-import uuid from 'uuid';
+import axios from 'axios';
 
 
 class App extends React.Component {
-
   state = {
-    media: [
-      {
-        id: uuid.v4(),
-        title: 'movie #1',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'movie #2',
-        completed: false
-      },
-      {
-        id: uuid.v4(),
-        title: 'movie #3',
-        completed: false,
-        selected: false
-      }
-    ]
+    media: []
+  }
+
+  componentDidMount() {
+    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=5')
+      .then(res => this.setState({ media: res.data }))
   }
 
   markComplete = (id) => {
@@ -45,17 +32,23 @@ class App extends React.Component {
   }
 
   delTodo = (id) => {
-    console.log(id);
-    this.setState({ media: [...this.state.media.filter(med => med.id !== id)] })
+    console.log('delete: ' + id);
+    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    .then(res => this.setState({ media: [...this.state.media.filter(med => med.id !== id)] }));
   }
   addTodo = (title) => {
-    console.log(title);
-    const newMedia = {
-      id: uuid.v4(),
-      title: title,
+    // console.log(title);
+    // const newMedia = {
+    //   id: uuid.v4(),
+    //   title: title,
+    //   completed: false
+    // }
+    axios.post('https://jsonplaceholder.typicode.com/todos/', {
+      title,
       completed: false
-    }
-    this.setState({ media: [...this.state.media, newMedia] })
+    })
+      .then(res => this.setState({ media: [...this.state.media, res.data] }))
+
   }
   render() {
     return (
